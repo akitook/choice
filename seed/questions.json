@@ -1,0 +1,407 @@
+[
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "寿司",
+        "url": "demo/demo_sushi.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "焼き肉",
+        "url": "demo/demo_yakiniku.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "寿司と焼き肉、どっちが好き？",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "歌の才能",
+        "url": "demo/demo_uta.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "絵描きの才能",
+        "url": "demo/demo_oekaki.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "歌の才能と絵描きの才能、どっちが欲しい？",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "山",
+        "url": "demo/demo_yama.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "海",
+        "url": "demo/demo_umi.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "あなたはどっち派？",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "友達！",
+        "url": "demo/demo_friend.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "彼氏/彼女",
+        "url": "demo/demo_couple.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "あなたにとって重要なのは...",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "犬",
+        "url": "demo/demo_dog.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "猫",
+        "url": "demo/demo_cat.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "どっち派？",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "紅茶",
+        "url": "demo/demo_tea.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "珈琲",
+        "url": "demo/demo_coffee.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "どっち派？",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "ショート",
+        "url": "demo/demo_short.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "ロング",
+        "url": "demo/demo_long.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "どっちの髪型が好き？",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "",
+        "url": "demo/demo_room1.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "",
+        "url": "demo/demo_room2.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "どっちの部屋に住みたい？",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "水着1",
+        "url": "demo/demo_mizugi01.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "水着2",
+        "url": "demo/demo_mizugi02.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "どちらの水着を着たい？",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "アディダス",
+        "url": "demo/demo_adidas.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "珈琲",
+        "url": "demo/demo_nike.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "どっち派？",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "北海道",
+        "url": "demo/demo_hokkaido.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "沖縄",
+        "url": "demo/demo_okinawa.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "春に行くならどっちがいい？A:北海道 B沖縄",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "眼鏡1",
+        "url": "demo/demo_megane01.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "眼鏡2",
+        "url": "demo/demo_megane02.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "かけるならどっちがいいかな？",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "東京タワー",
+        "url": "demo/demo_tower01.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "スカイツリー",
+        "url": "demo/demo_tower02.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "デートで行くならどっちがいい？",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "髪型1",
+        "url": "demo/demo_kimono01.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "髪型2",
+        "url": "demo/demo_kimono02.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "どっちの髪型が好き？",
+    "type": "text",
+    "public": true
+  },
+  {
+    "author": {
+      "uid": "00000000000000000",
+      "displayName": "シロクマ",
+      "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg"
+    },
+    "category": 0,
+    "choice": {
+      "total": 0,
+      "one": {
+        "total": 0,
+        "title": "iPhone",
+        "url": "demo/demo_iphone.jpg",
+        "users": []
+      },
+      "two": {
+        "total": 0,
+        "title": "android",
+        "url": "demo/demo_android.jpg",
+        "users": []
+      }
+    },
+    "expired": "",
+    "title": "どっち使ってる？ A:iPhone B:Android",
+    "type": "text",
+    "public": true
+  }
+]

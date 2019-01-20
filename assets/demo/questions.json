@@ -1,0 +1,116 @@
+[
+  {
+    "authorRef": 0,
+    "category": 0,
+    "choice": {
+      "total": 1,
+      "one": {
+        "title": "らーめん",
+        "url": "/demo/1.jpeg"
+      },
+      "two": {
+        "title": "うどん",
+        "url": "/demo/2.jpeg"
+      }
+    },
+    "created": "",
+    "expired": "",
+    "title": "どっちが美味しい？",
+    "type": "text"
+  },
+  {
+    "authorRef": 0,
+    "category": 0,
+    "choice": {
+      "total": 1,
+      "one": {
+        "title": "ポケモン",
+        "url": "/demo/2.jpeg"
+      },
+      "two": {
+        "title": "デジモン",
+        "url": "/demo/1.jpeg"
+      }
+    },
+    "created": "",
+    "expired": "",
+    "title": "どっちが好き？",
+    "type": "text"
+  },
+  {
+    "authorRef": 0,
+    "category": 0,
+    "choice": {
+      "total": 1,
+      "one": {
+        "title": "寿司",
+        "url": "/demo/3.jpeg"
+      },
+      "two": {
+        "title": "焼き肉",
+        "url": "/demo/4.jpeg"
+      }
+    },
+    "created": "",
+    "expired": "",
+    "title": "どっちが美味しい？",
+    "type": "text"
+  },
+  {
+    "authorRef": 0,
+    "category": 0,
+    "choice": {
+      "total": 1,
+      "one": {
+        "title": "らーめん",
+        "url": "/demo/1.jpeg"
+      },
+      "two": {
+        "title": "うどん",
+        "url": "/demo/2.jpeg"
+      }
+    },
+    "created": "",
+    "expired": "",
+    "title": "どっちが美味しい？",
+    "type": "text"
+  },
+  {
+    "authorRef": 0,
+    "category": 0,
+    "choice": {
+      "total": 1,
+      "one": {
+        "title": "ポケモン",
+        "url": "/demo/2.jpeg"
+      },
+      "two": {
+        "title": "デジモン",
+        "url": "/demo/1.jpeg"
+      }
+    },
+    "created": "",
+    "expired": "",
+    "title": "どっちが好き？",
+    "type": "text"
+  },
+  {
+    "authorRef": 0,
+    "category": 0,
+    "choice": {
+      "total": 1,
+      "one": {
+        "title": "寿司",
+        "url": "/demo/3.jpeg"
+      },
+      "two": {
+        "title": "焼き肉",
+        "url": "/demo/4.jpeg"
+      }
+    },
+    "created": "",
+    "expired": "",
+    "title": "どっちが美味しい？",
+    "type": "text"
+  }
+]

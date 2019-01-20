@@ -1,0 +1,24 @@
+{
+  "author": {
+    "uid": "jaaakarhu", //string
+    "displayName": "シロクマ", //string
+    "photoURL": "https://lh6.googleusercontent.com/-ncaqT9dkDro/AAAAAAAAAAI/AAAAAAAAAA4/zP-47IJC3iI/photo.jpg" //string
+  },
+  "category": 0, //Number
+  "choice": { //Object
+    "total": 0, //Number
+    "one": {
+      "title": "寿司",
+      "url": "demo/demo_sushi.jpg",
+      "users": []
+    },
+    "two": {
+      "title": "焼き肉",
+      "url": "demo/demo_yakiniku.jpg",
+      "users": []
+    }
+  },
+  "expired": "",
+  "title": "寿司と焼き肉、どっちが好き？",
+  "type": "text"
+}

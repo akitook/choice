@@ -1,0 +1,45 @@
+// Import Vuetify styling
+@require '~vuetify/src/stylus/main.styl'
+
+/* RESETS */
+
+html {
+  box-sizing: border-box;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+body {
+  min-width: 320px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  color: $colour-text;
+  overflow: hidden;
+  background: $colour-background;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -moz-font-feature-settings: 'liga' on;
+}
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+aside,
+section,
+main,
+nav,
+header,
+footer {
+  display: block;
+}
