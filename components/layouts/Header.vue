@@ -46,7 +46,7 @@
       </v-toolbar-title>
       <v-spacer/>
       <v-btn
-        :to="user.data ? '/post' : '/login'"
+        to="/post"
         small
         color="primary">質問する</v-btn>
     </v-toolbar>

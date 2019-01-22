@@ -2,6 +2,7 @@
   <V-layout
     column
     align-center>
+    <PageTitle title="質問の作成" />
     <v-form
       ref="form"
       v-model="valid"
@@ -81,10 +82,12 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import PageTitle from '~/components/ui/PageTitle.vue'
 import Compressor from 'compressorjs'
 import User from '../ui/User'
 export default {
   components: {
+    PageTitle,
     User
   },
   data() {

@@ -3,18 +3,22 @@
     column
     justify-center
   >
-    <PageTitle title="質問の作成" />
-    <PostForm />
+    <PostForm v-if="user.data" />
+    <Login v-else/>
   </v-layout>
 </template>
 <script>
-import PageTitle from '~/components/ui/PageTitle.vue'
+import { mapState } from 'vuex'
 import PostForm from '~/components/pages/PostForm.vue'
+import Login from '~/components/pages/Login.vue'
 
 export default {
   components: {
-    PageTitle,
-    PostForm
+    PostForm,
+    Login
+  },
+  computed: {
+    ...mapState(['user'])
   }
 }
 </script>
