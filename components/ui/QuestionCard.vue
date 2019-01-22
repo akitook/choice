@@ -240,6 +240,7 @@ $defaultScale: 1 - ($cardsScaleOffset * $cardsTotal);
   width: $cardsWidth;
   max-width: $cardsMaxWidth;
   height: $cardsHeight;
+  max-height: $cardsMaxHeight;
   border-radius: 8px;
   background: $colour-white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

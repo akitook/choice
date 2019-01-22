@@ -57,7 +57,7 @@ export default {
     return new Promise((resolve, reject) => {
       firestore
         .collection('questions')
-        .where('user', '==', uid)
+        .where('author.uid', '==', uid)
         .get()
         .then(querySnapshot => {
           const records = querySnapshot.docs.map(elem => elem.data())

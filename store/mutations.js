@@ -33,6 +33,10 @@ export default {
       lastVisible: res.lastVisible
     }
   },
+  SUCCESS_FETCH_USER_QUESTIONS: (state, res) => {
+    state.userQuestions = res
+  },
+  FAILED_FETCH_USER_QUESTIONS: (state, err) => {},
   FAILED_FETCH_QUESTIONS: (state, err) => {},
   SUCCESS_UPDATE_CARD: state => {},
   FAILED_UPDATE_CARD: state => {},

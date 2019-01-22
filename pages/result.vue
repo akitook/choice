@@ -5,8 +5,8 @@
     align-center>
     <PageTitle title="結果" />
     <QuestionList
-      v-if="questions.records"
-      :questions="questions.records"/>
+      v-if="userQuestions.records"
+      :questions="userQuestions.records"/>
     <div v-else>
       <Loading />
     </div>
@@ -24,12 +24,18 @@ export default {
     QuestionList,
     Loading
   },
+  data() {
+    return {}
+  },
   computed: {
-    ...mapState(['questions', 'user'])
+    ...mapState(['userQuestions', 'user'])
   },
   created() {},
   mounted() {
-    this.$store.dispatch('fetchUserQuestions', this.user.data)
+    console.log(this.state)
+    this.user.data
+      ? this.$store.dispatch('fetchUserQuestions', this.user.data.uid)
+      : null
   }
 }
 </script>

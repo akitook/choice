@@ -46,6 +46,19 @@ export const fetchQuestions = ({ dispatch, commit }, user) => {
     })
 }
 
+export const fetchUserQuestions = ({ dispatch, commit }, userId) => {
+  firebase
+    .fetchUserQuestions(userId)
+    .then(res => {
+      console.log(res)
+      commit('SUCCESS_FETCH_USER_QUESTIONS', res)
+    })
+    .catch(err => {
+      console.log(err)
+      commit('FAILED_FETCH_USER_QUESTIONS')
+    })
+}
+
 export const updateAnswer = ({ dispatch, commit }, payload) => {
   //payload {card, approval, user}
   firebase
