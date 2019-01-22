@@ -1,5 +1,7 @@
 <template>
-  <div class="item-container">
+  <div
+    v-if="questions"
+    class="item-container">
     <div class="imageBox">
       <div
         :style="{
@@ -44,7 +46,10 @@ export default {
   props: {
     question: {
       type: Object,
-      required: true
+      required: false,
+      default: function() {
+        return {}
+      }
     }
   },
   data() {

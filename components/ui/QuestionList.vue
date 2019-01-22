@@ -17,7 +17,9 @@ export default {
   props: {
     questions: {
       type: Array,
-      required: true
+      default: function() {
+        return []
+      }
     }
   },
   data() {

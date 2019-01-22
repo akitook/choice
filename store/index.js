@@ -17,6 +17,10 @@ const store = () => {
       questions: {
         records: null,
         lastVisible: null
+      },
+      userQuestions: {
+        records: null,
+        lastVisible: null
       }
     },
     actions,
