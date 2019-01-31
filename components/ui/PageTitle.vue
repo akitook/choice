@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2 class="title">{{ title }}</h2>
+    <h2 class="page-title">{{ title }}</h2>
   </div>
 </template>
 <script>
@@ -15,11 +15,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
-  padding: 16px 8px;
+  padding: 12px 8px;
   text-align: center;
-  border-bottom: 1px solid #ccc;
 }
-.title {
+.page-title {
   font-size: 16px;
   line-height: 1.5;
   font-weight: bold;

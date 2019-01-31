@@ -1,9 +1,12 @@
 <template>
   <V-layout
     column
-    align-center>
-    <PageTitle title="質問の作成" />
+    align-center
+  >
+    <PageTitle
+      :title="!post.isSave ? '質問の作成' : '質問が投稿されました！'" />
     <v-form
+      v-if="!post.isSave"
       ref="form"
       v-model="valid"
       lazy-validation
@@ -15,7 +18,7 @@
         :rules="[v => !!v || 'Item is required']"
         label="質問形式"
         required
-        disabled
+        flat
       />
       <div class="card">
         <div class="imageBox">
@@ -47,7 +50,7 @@
               type="file"
               style="display: none"
               accept="image/*"
-              required
+              されrequired
               @change="onFilePicked(2, $event)"
             >
           </div>
@@ -65,8 +68,12 @@
             質問<small> (50文字まで)</small>
           </div>
         </v-textarea>
-        <User :data="user.data" />
       </div>
+      <v-checkbox
+        v-model="privateMode"
+        label="プライベートモードにする"
+      />
+      <small>プライベートモードにチェックすると、URLを知っている人にのみ公開されます。</small>
       <div class="btn-container">
         <v-btn
           :disabled="title.length <= 6 || !images[0].file || !images[1].file"
@@ -78,6 +85,10 @@
         </v-btn>
       </div>
     </v-form>
+    <ShareCard
+      v-else
+      :question="post.data"
+    />
   </V-layout>
 </template>
 <script>
@@ -85,10 +96,15 @@ import { mapState } from 'vuex'
 import PageTitle from '~/components/ui/PageTitle.vue'
 import Compressor from 'compressorjs'
 import User from '../ui/User'
+import QuestionCard from '../ui/QuestionCard'
+import ShareCard from '../ui/ShareCard'
+
 export default {
   components: {
+    QuestionCard,
     PageTitle,
-    User
+    User,
+    ShareCard
   },
   data() {
     return {
@@ -100,6 +116,7 @@ export default {
         v => !!v || '6文字以上',
         v => (v && v.length >= 6) || '質問文は6文字以上入力してください。'
       ],
+      privateMode: false,
       images: [
         {
           name: null,
@@ -115,10 +132,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['user'])
+    ...mapState(['user', 'post'])
   },
   mounted() {
-    //if not login, redirect login
+    this.$store.dispatch('post/initPostForm')
   },
   methods: {
     validate() {
@@ -128,12 +145,12 @@ export default {
         this.images[1].file
       ) {
         this.valid = false
-        this.$store.dispatch('postQuestion', {
+        this.$store.dispatch('post/postQuestion', {
           title: this.title,
           images: this.images,
           user: this.user.data
         })
-        this.$router.push('/')
+        this.inPost = false
       }
     },
     pickFile(image, e) {
@@ -182,8 +199,9 @@ export default {
   padding: 15px 15px 30px 15px;
   width: $cardsWidth;
   max-width: $cardsMaxWidth;
+  margin: 0 auto;
   border-radius: 8px;
-  background: $colour-white;
+  background: $color-white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .imageBox {
@@ -205,5 +223,12 @@ export default {
 .btn-container {
   padding: 8px;
   text-align: center;
+}
+.card-container {
+  position: relative;
+  top: 50%;
+  margin: 0 auto 0 auto;
+  width: $cardsWidth;
+  max-width: $cardsMaxWidth;
 }
 </style>

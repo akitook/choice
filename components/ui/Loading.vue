@@ -20,7 +20,7 @@ $loadingSize: 125px;
   width: $loadingSize;
   height: $loadingSize;
   border-radius: 50%;
-  border: 4px solid $colour-white;
+  border: 4px solid $color-white;
 }
 
 .loading {

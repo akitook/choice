@@ -1,9 +1,6 @@
 <template>
   <div
-    v-if="showing"
-    :class="{ animated: animating, current: current}"
-    :style="{ transform: returnTransformString }"
-    class="card">
+    class="result-card">
     <div class="imageBox">
       <div
         :style="{
@@ -32,25 +29,6 @@
         <v-flex grow>
           <User :data="question.author" />
         </v-flex>
-        <v-flex shrink>
-          <div class="icons">
-            <TweetButton
-              url="https://kakidashi.hauer.jp"
-              tweet="hogehoge"
-              size="medium"
-            />
-            <LineButton
-              url="fff"
-              size="medium"
-            />
-            <img
-              class="icon"
-              src="~/assets/icon/flag.png"
-              alt="報告"
-              @click="$emit('toggleModal')"
-            >
-          </div>
-        </v-flex>
       </v-layout>
     </div>
   </div>
@@ -58,28 +36,14 @@
 <script>
 import interact from 'interactjs'
 import storage from '~/api/firestorage'
-import User from '~/components/ui/User'
-import TweetButton from '~/components/ui/TweetButton'
-import LineButton from '~/components/ui/LineButton'
-
+import User from '../ui/User'
 export default {
   components: {
-    User,
-    TweetButton,
-    LineButton
+    User
   },
   props: {
     question: {
       type: Object,
-      required: true
-    },
-    approved: {
-      type: Boolean,
-      required: false,
-      default: null
-    },
-    current: {
-      type: Boolean,
       required: true
     }
   },
@@ -223,12 +187,7 @@ export default {
         */
         console.log('onend')
         self.animating = true
-        self.position.x = 0
-        self.position.y = 0
-        self.position.rotation = 0
-        self.icon.opacity = 0
-        self.imageWidth = 50
-        /*
+
         if (self.position.x > self.threshold) {
           console.log('a')
           self.$emit('draggedThreshold', true)
@@ -244,7 +203,7 @@ export default {
           self.icon.opacity = 0
           self.imageWidth = 50
         }
-        */
+
         self.$emit('draggedEnded')
       }
     })
@@ -269,12 +228,9 @@ $defaultScale: 1 - ($cardsScaleOffset * $cardsTotal);
   pointer-events: none;
   z-index: 0;
   opacity: 0;
-  /*
   left: 0;
   top: 0;
   position: absolute;
-  */
-  margin: 16px auto;
   width: $cardsWidth;
   max-width: $cardsMaxWidth;
   height: $cardsHeight;
@@ -299,14 +255,13 @@ $defaultScale: 1 - ($cardsScaleOffset * $cardsTotal);
   $scale: 1 - ($cardsScaleOffset * $index);
 
   .card:nth-child(#{$i}) {
-    opacity: 0;
+    opacity: 1;
     z-index: $cardsTotal - $index;
     transform: translateY($translation) scale($scale);
   }
 }
 
 .card.current {
-  opacity: 1;
   pointer-events: auto;
 }
 
@@ -377,9 +332,6 @@ $defaultScale: 1 - ($cardsScaleOffset * $cardsTotal);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  a {
-    display: block;
-  }
 }
 .icon {
   width: 24px;

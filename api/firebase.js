@@ -15,6 +15,7 @@ export default {
       let first_records, second_records, records
       query
         .where('author.uid', '>', userId)
+        .limit(20)
         .get()
         .then(querySnapshot => {
           first_records = querySnapshot.docs.map(elem => elem.data())
@@ -39,7 +40,7 @@ export default {
         })
     })
   },
-  fetchQuestionsById(uid) {
+  fetchQuestion(uid) {
     return new Promise((resolve, reject) => {
       firestore
         .collection('questions')
@@ -165,11 +166,11 @@ export default {
         })
     })
   },
-  deleteQuestions(book) {
+  deleteQuestion(id) {
     return new Promise((resolve, reject) => {
       firestore
         .collection('questions')
-        .doc(book.uid)
+        .doc(id)
         .delete()
         .then(docRef => {
           resolve(docRef)

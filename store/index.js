@@ -1,31 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as actions from './actions'
-import * as getters from './getters'
-import mutations from './mutations'
-
+import user from './modules/user'
+import post from './modules/post'
+import question from './modules/question'
+import questions from './modules/questions'
+import snackbar from './modules/snackbar'
 Vue.use(Vuex)
 
 const store = () => {
   return new Vuex.Store({
-    state: {
-      device: null,
-      user: {
-        isLogging: false,
-        data: null
-      },
-      questions: {
-        records: null,
-        lastVisible: null
-      },
-      userQuestions: {
-        records: null,
-        lastVisible: null
-      }
-    },
-    actions,
-    mutations,
-    getters
+    modules: {
+      user,
+      post,
+      question,
+      questions,
+      snackbar
+    }
   })
 }
 

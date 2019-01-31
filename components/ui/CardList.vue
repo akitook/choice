@@ -1,26 +1,39 @@
 <template>
-  <div class="card-container">
+  <div
+    :style="{height: `${cardContainerHeight}px`}"
+    class="card-container"
+  >
     <QuestionCard
       v-for="(card, index) in cards.data"
       :key="index"
       :question="card"
       :current="index === cards.index"
       :approved="card.approved"
-      @draggedThreshold="onThrowout"/>
-    <Result
-      :show="isShowResult"
-      :data="cards.data[cards.index - 1]"
-      :approval="approval"
+      @draggedThreshold="onThrowout"
+      @toggleModal="toggleModal"
+    />
+    <div
+      v-if="false"
+      class="test"
+      style="position: fixed; bottom: 0;">
+      windowHeight: {{ windowHeight }} innerHeight: {{ innerHeight }} cardContainer: {{ cardContainerHeight }}
+    </div>
+    <ReportFormModal
+      :is-open="isOpenModal"
+      :question="cards.data[cards.index]"
+      @toggleModal="toggleModal"
     />
   </div>
 </template>
 <script>
 import { mapState } from 'vuex'
 import QuestionCard from './QuestionCard'
+import ReportFormModal from './ReportFormModal'
 import Result from './Result'
 export default {
   components: {
     QuestionCard,
+    ReportFormModal,
     Result
   },
   props: {
@@ -31,6 +44,9 @@ export default {
   },
   data() {
     return {
+      windowHeight: 0,
+      innerHeight: 0,
+      cardContainerHeight: 0,
       config: {
         minThrowOutDistance: 250,
         maxThrowOutDistance: 300
@@ -44,13 +60,23 @@ export default {
       },
       isShowResult: false,
       timer: null,
-      approval: null
+      approval: null,
+      isOpenModal: false
     }
   },
   computed: {
     ...mapState(['user'])
   },
-  mounted() {},
+  created() {
+    if (process.browser) {
+      console.log(navigator.userAgent)
+      const innerHeight = require('ios-inner-height')()
+      this.windowHeight = window.innerHeight
+      this.innerHeight = innerHeight
+      // cardContainer: アドレスバーを引いた高さ - margin-top:16px - header - Result(40 + margin-top:24px)
+      this.cardContainerHeight = window.innerHeight - 16 - 56 - 64
+    }
+  },
   methods: {
     onThrowout(approval) {
       console.log(approval)
@@ -72,8 +98,8 @@ export default {
         approval
       }
       // aorb の dispatch
-      this.$store.dispatch('updateAnswer', payload)
-      this.$store.dispatch('updateUserAnswer', payload)
+      this.$store.dispatch('questions/updateAnswer', payload)
+      this.$store.dispatch('questions/updateUserAnswer', payload)
       this.cards.data[this.cards.index].approved = approval
       this.cards.index++
       if (this.cards.index >= this.cards.data.length) {
@@ -84,7 +110,10 @@ export default {
       this.isShowResult = false
     },
     startTimer() {
-      this.timer = setTimeout(this.closeResult, 3000)
+      this.timer = setTimeout(this.closeResult, 4000)
+    },
+    toggleModal() {
+      this.isOpenModal = !this.isOpenModal
     }
   }
 }
@@ -92,11 +121,8 @@ export default {
 <style lang="scss" scoped>
 .card-container {
   position: relative;
-  top: 50%;
-  margin: 0 auto 0 auto;
-  width: $cardsWidth;
+  width: 100vw;
   max-width: $cardsMaxWidth;
-  height: $cardsHeight + ($cardsPositionOffset * ($cardsTotal - 1));
   //transform: translateY(-50%);
 }
 </style>

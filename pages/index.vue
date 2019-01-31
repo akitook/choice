@@ -27,7 +27,7 @@ export default {
   },
   created() {},
   mounted() {
-    this.$store.dispatch('fetchQuestions', this.user.data)
+    this.$store.dispatch('questions/fetchQuestions', this.user.data)
     console.log(this.questions)
   }
 }

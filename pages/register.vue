@@ -1,13 +1,8 @@
 <template>
   <v-layout>
     <v-flex text-xs-center>
-      <div class="header-text">WAVERで質問するために、<span class="inlineblock">無料登録・ログインしてね！</span></div>
-      <div class="text">ログインすることで、勝手にツイートしたり、DMを送信することはありません。</div>
-      <div class="flexBox">
-        <div class="image">
-          <img src="~/assets/image/image01.png">
-        </div>
-      </div>
+      <PageTitle title="無料会員登録" />
+
       <div class="login-form">
         <v-btn
           block
@@ -91,40 +86,13 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-.header-text {
-  padding: 16px 8px;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 16px;
-}
-.text {
-  color: #333;
-  text-align: left;
-}
-.flexBox {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.image {
-  width: 50%;
-  max-width: 750px;
-  margin: 0 auto;
-  img {
-    max-width: 100%;
-  }
-}
-.inlineblock {
-  display: inline-block;
-}
+<style>
 .login-form {
-  padding: 8px;
+  padding: 24px;
 }
 .btn {
-  margin: 12px 0;
+  margin: 32px 0;
   font-size: 12px;
-  font-weight: bold;
 }
 .icon {
   width: 32px;

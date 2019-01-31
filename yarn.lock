@@ -4764,6 +4764,11 @@ invert-kv@^1.0.0:
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
   integrity sha1-EEqOSqym09jNFXqO+L+rLXo//bY=
 
+ios-inner-height@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ios-inner-height/-/ios-inner-height-1.1.0.tgz#87e0003ee181c18e070640d10ba5e6434147306a"
+  integrity sha512-ms/ifgoozTQSyw2Gp9u3QGB7nPw/ZTdjjriKY10m0MPdnA5TiEJiEofOc5ThGR9ACj1VosdzYDPqluMQ3/xJkQ==
+
 ip@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/ip/-/ip-1.1.5.tgz#bdded70114290828c0a039e72ef25f5aaec4354a"
@@ -6204,6 +6209,11 @@ object.values@^1.0.4:
     es-abstract "^1.12.0"
     function-bind "^1.1.1"
     has "^1.0.3"
+
+odometer@^0.4.8:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/odometer/-/odometer-0.4.8.tgz#2f6703bf4c6b384c278236d04d4bc8171abe4374"
+  integrity sha1-L2cDv0xrOEwngjbQTUvIFxq+Q3Q=
 
 on-finished@~2.3.0:
   version "2.3.0"
@@ -8945,6 +8955,13 @@ uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
   integrity sha512-yXJmeNaw3DnnKAOKJE51sL/ZaYfWJRl1pK9dr19YFCu0ObS231AB1/LbqTKRAQ5kw8A90rA6fr4riOUpTZvQZA==
+
+v-odometer@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/v-odometer/-/v-odometer-2.0.0.tgz#f1a70ec97abade1d928b6bb1fd2a57fea6c1c92a"
+  integrity sha512-/wwaMWg5qYwVw9hBKxE97RGJoBLldmOwgDq7D3/XuhT9t5OdXFbXUIoVN8eKSnPqokjvb/3RydeyC0q3zvkbyA==
+  dependencies:
+    odometer "^0.4.8"
 
 validate-npm-package-license@^3.0.1:
   version "3.0.4"

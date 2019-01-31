@@ -1,18 +1,18 @@
 <template>
   <div
-    v-if="data"
     class="user">
     <v-avatar
       size="32"
     >
       <img
-        :src="data.photoURL"
-        :alt="data.displayName"
+        :src="data ? data.photoURL : '/user.jpg'"
+        :alt="data ? data.displayName : 'ユーザー'"
         class="thumbnail"
       >
     </v-avatar>
 
-    <div class="user-name">{{ data.displayName }}</div>
+    <div
+      class="user-name">{{ data ? data.displayName : 'ユーザー' }}</div>
   </div>
 </template>
 <script>
@@ -35,7 +35,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 1rem 0;
+  padding: 8px 0;
 }
 .thumbnail {
   width: 100%;

@@ -2,19 +2,18 @@
   <v-app>
     <Header />
     <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
+    <Snackbar />
   </v-app>
 </template>
 
 <script>
 import Header from '~/components/layouts/Header'
-import Footer from '~/components/layouts/Footer'
+import Snackbar from '~/components/layouts/Snackbar'
 
 export default {
-  components: { Header, Footer },
+  components: { Header, Snackbar },
   data() {
     return {
       clipped: false,

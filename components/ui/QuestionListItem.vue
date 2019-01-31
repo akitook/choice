@@ -1,7 +1,8 @@
 <template>
   <div
-    v-if="questions"
-    class="item-container">
+    v-if="question"
+    class="item-container"
+    @click="$emit('moveToDetail', question)">
     <div class="imageBox">
       <div
         :style="{
@@ -129,6 +130,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   color: #7f828b;
+  font-size: 12px;
   font-weight: normal;
   .date {
     padding: 0 4px;
@@ -149,7 +151,7 @@ export default {
   align-items: center;
 }
 .bar {
-  height: 8px;
+  height: 4px;
   transition: all 0.2s linear;
   font-size: 12px;
   color: #fff;

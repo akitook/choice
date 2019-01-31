@@ -4,11 +4,17 @@
       v-for="(data, index) in questions"
       :key="index"
       :question="data"
+      @moveToDetail="moveToDetail"
     />
+    <div
+      v-if="questions.length === 0"
+      class="message"
+    >
+      投稿した質問はないようです。
+    </div>
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
 import QuestionListItem from './QuestionListItem'
 export default {
   components: {
@@ -17,22 +23,35 @@ export default {
   props: {
     questions: {
       type: Array,
-      default: function() {
+      default: () => {
         return []
       }
     }
   },
   data() {
-    return {}
+    return {
+      questionItems: []
+    }
   },
-  computed: {},
   mounted() {},
-  methods: {}
+  methods: {
+    moveToDetail(questionData) {
+      this.$store.dispatch('question/setQuestion', questionData)
+      this.$router.push({
+        name: 'card-id',
+        params: { id: questionData.id }
+      })
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
 .list-container {
+  width: 100%;
   padding: 8px 0;
   position: relative;
+}
+.message {
+  text-align: center;
 }
 </style>

@@ -1,10 +1,6 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <v-container>
+  <v-layout>
+    <v-flex text-xs-center>
       <div
         v-if="user.data"
         class="user">
@@ -15,22 +11,16 @@
         >
         <div>{{ user.data.displayName }}</div>
       </div>
-      <QuestionList
-        v-if="user.questions"
-        :questions="user.questions"/>
-    </v-container>
+      <v-btn
+        flat
+        color="error"
+        @click="logout">ログアウト</v-btn>
+    </v-flex>
   </v-layout>
 </template>
 <script>
 import { mapState } from 'vuex'
-import QuestionList from '~/components/ui/QuestionList.vue'
-import Loading from '~/components/ui/Loading.vue'
-
 export default {
-  components: {
-    QuestionList,
-    Loading
-  },
   data() {
     return {}
   },
@@ -41,11 +31,14 @@ export default {
     this.$store.dispatch('user/fetchStatus')
   },
   mounted() {
-    !this.user.data
-      ? this.$router.push('/login')
-      : this.$store.dispatch('user/fetchUserQuestions', this.user.data.uid)
+    !this.user.data ? this.$router.push('/login') : null
   },
-  methods: {}
+  methods: {
+    logout: function() {
+      this.$router.push('/')
+      this.$store.dispatch('user/logout')
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -60,8 +53,5 @@ export default {
   height: 32px;
   border-radius: 16px;
   margin-right: 12px;
-}
-.message {
-  text-align: center;
 }
 </style>

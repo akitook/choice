@@ -1,29 +1,50 @@
 <template>
   <transition
-    enter-active-class="animated bounceInUp"
-    leave-active-class="animated bounceOutDown"
+    enter-active-class="animated resultIn"
+    leave-active-class="animated resultOut"
   >
     <div
       v-if="show && data"
       class="result"
     >
-      <div class="bar-title">{{ data.title }}</div>
-      <div class="bar-container">
+      <div class="total">{{ data.choice.total }} <span>votes</span></div>
+      <div
+        :style="{height: `${containerHeight}px`}"
+        class="imageBox">
         <div
-          :style="{width: `${oneRate}%`}"
-          class="bar one">
-          a: {{ data.choice.one.total }}票
+          :style="{
+          background: `#FF008C url(${storageUrl1}) center center / cover`}"
+          class="image one"
+        >
+          <div class="contents">
+            <div class="result-rate">{{ oneRate }}<span>% ({{ data.choice.one.total }})</span></div>
+            <div class="bar-container">
+              <div
+                :style="{width: `${oneRate}%`}"
+                class="bar one" />
+            </div>
+          </div>
         </div>
         <div
-          :style="{width: `${twoRate}%`}"
-          class="bar two">
-          b: {{ data.choice.two.total }}票
+          :style="{
+          background: `#3377F6 url(${storageUrl2}) center center / cover`}"
+          class="image two"
+        >
+          <div class="contents">
+            <div class="result-rate">{{ twoRate }}<span>% ({{ data.choice.two.total }})</span></div>
+            <div class="bar-container">
+              <div
+                :style="{width: `${twoRate}%`}"
+                class="bar two" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </transition>
 </template>
 <script>
+import storage from '~/api/firestorage'
 export default {
   props: {
     show: {
@@ -38,18 +59,33 @@ export default {
     },
     approval: {
       type: Boolean,
-      required: true
+      default: null
     }
   },
   data() {
     return {
-      oneRate: 50,
-      twoRate: 50
+      oneRate: 0,
+      twoRate: 0,
+      storageUrl1: '',
+      storageUrl2: '',
+      containerHeight: 0
     }
   },
   watch: {
     data: function(newVal, oldVal) {
       this.data ? this.calculateRate() : null
+      storage.fetchStorageUrl(this.data.choice.one.url).then(url => {
+        this.storageUrl1 = url
+      })
+      storage.fetchStorageUrl(this.data.choice.two.url).then(url => {
+        this.storageUrl2 = url
+      })
+    }
+  },
+  created() {
+    if (process.browser) {
+      // cardContainer: アドレスバーを引いた高さ - margin-top:16px - header
+      this.containerHeight = window.innerHeight - 56
     }
   },
   methods: {
@@ -57,43 +93,77 @@ export default {
       const total = this.data.choice.total
       const oneTotal = this.data.choice.one.total
       const twoTotal = this.data.choice.two.total
-      this.oneRate = (oneTotal / total) * 100
-      this.twoRate = (twoTotal / total) * 100
+      this.oneRate = Math.ceil((oneTotal / total) * 100)
+      this.twoRate = 100 - this.oneRate
     }
   }
 }
 </script>
 <style lang="scss" scoped>
-.v-snack__content {
-  padding: 0 !important;
-}
 .result {
-  position: fixed;
   font-size: 14px;
-  left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
 }
-.bar-title {
-  padding: 0 4px;
-  font-size: 10px;
-}
-.bar-container {
+.imageBox {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
   display: flex;
-  align-items: center;
 }
-.bar {
-  height: 30px;
-  padding: 0 4px;
-  transition: all 0.2s linear;
-  font-size: 12px;
+.image {
   color: #fff;
+  width: 50%;
+  height: 100%;
+}
+.total {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+  color: #fff;
+  font-size: 24px;
+  padding: 32px;
+  span {
+    font-size: 18px;
+  }
 }
 .one {
-  background: #f24e86 center center / cover;
+  background: $color-a center center / cover;
 }
 .two {
-  background: #02b4ff center center / cover;
+  background: $color-b center center / cover;
+}
+.contents {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.result-rate {
+  font-size: 42px;
+  span {
+    font-size: 24px;
+  }
+}
+.bar-container {
+  position: relative;
+  width: 100%;
+}
+.result-in .bar {
+  transition: all 4s ease-in 1s;
+}
+.bar {
+  position: absolute;
+  width: 0;
+  height: 12px;
+  &.one {
+    right: 0;
+  }
+  &.two {
+    left: 0;
+  }
 }
 </style>

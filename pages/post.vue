@@ -3,8 +3,10 @@
     column
     justify-center
   >
-    <PostForm v-if="user.data" />
-    <Login v-else/>
+    <v-container>
+      <PostForm v-if="user.data" />
+      <Login v-else/>
+    </v-container>
   </v-layout>
 </template>
 <script>

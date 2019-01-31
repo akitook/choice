@@ -60,6 +60,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    vendor: ['ios-inner-height'],
     /*
     ** You can extend webpack config here
     */

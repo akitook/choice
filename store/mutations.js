@@ -42,8 +42,33 @@ export default {
   FAILED_UPDATE_CARD: state => {},
   SUCCESS_UPDATE_USER_ANSWER: state => {},
   FAILED_UPDATE_USER_ANSWER: state => {},
-  SUCCESS_POST_QUESTION: state => {},
+  INIT_POST_FORM: state => {
+    state.post = {
+      data: null,
+      isSave: false,
+      isInInput: true
+    }
+  },
+  SUCCESS_POST_QUESTION: (state, data) => {
+    //投稿中のポストデータに格納
+    state.post = {
+      ...state.post,
+      data,
+      isInInput: false
+    }
+  },
   FAILED_POST_QUESTION: state => {},
-  SUCCESS_UPLOAD_IMAGE: state => {},
-  FAILED_UPLOAD_IMAGE: state => {}
+  SUCCESS_UPLOAD_IMAGE: state => {
+    state.post = {
+      ...state.post
+    }
+  },
+  FAILED_UPLOAD_IMAGE: state => {},
+  COMPLETE_UPLOAD_IMAGE: state => {
+    state.post = {
+      ...state.post,
+      isSave: true,
+      isInInput: false
+    }
+  }
 }

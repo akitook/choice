@@ -8,7 +8,6 @@
       temporary
       app
     >
-
       <v-list>
         <V-list-tile>
           <nuxt-link to="/mypage">
@@ -26,7 +25,9 @@
             <v-icon v-html="item.icon" />
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title v-text="item.title" />
+            <v-list-tile-title
+              class="font-weight-bold"
+              v-text="item.title" />
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -41,14 +42,21 @@
       <v-toolbar-side-icon @click="drawer = !drawer" />
       <v-toolbar-title>
         <nuxt-link to="/">
-          WAVERR
+          <img
+            class="logo"
+            src="~/assets/svg/logo.svg"
+            alt="waverrr">
         </nuxt-link>
       </v-toolbar-title>
       <v-spacer/>
       <v-btn
         to="/post"
         small
-        color="primary">質問する</v-btn>
+        round
+        depressed
+        color="#FF008C"
+        class="white--text font-weight-bold"
+      >質問する</v-btn>
     </v-toolbar>
   </div>
 </template>
@@ -67,7 +75,6 @@ export default {
       items: [
         { icon: 'compare_arrows', title: '答える', to: '/' },
         { icon: 'fiber_new', title: '質問する', to: '/post' },
-        { icon: 'insert_chart_outlined', title: '結果を見る', to: '/result' },
         { icon: 'settings', title: '設定', to: '/setting' }
       ],
       miniVariant: false,
@@ -80,9 +87,12 @@ export default {
     ...mapState(['user'])
   },
   created() {
-    this.$store.dispatch('fetchStatus')
+    this.$store.dispatch('user/fetchStatus')
   }
 }
 </script>
 <style lang="scss" scoped>
+.logo {
+  width: 100px;
+}
 </style>

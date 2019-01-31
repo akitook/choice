@@ -85,13 +85,17 @@ export const updateUserAnswer = ({ dispatch, commit }, payload) => {
     })
 }
 
+export const initPostForm = ({ commit }) => {
+  commit('INIT_POST_FORM')
+}
+
 export const postQuestion = ({ dispatch, commit }, payload) => {
   //payload {title, images, user}
   firebase
     .postQuestion(payload)
     .then(data => {
       dispatch('uploadImages', { images: payload.images, question_id: data.id })
-      commit('SUCCESS_POST_QUESTION')
+      commit('SUCCESS_POST_QUESTION', data)
     })
     .catch(errMessage => {
       console.log(errMessage)
@@ -101,13 +105,16 @@ export const postQuestion = ({ dispatch, commit }, payload) => {
 
 export const uploadImages = ({ dispatch, commit }, payload) => {
   // payload {images, question_id}
-  for (let i = 0; i < payload.images.length; i++) {
+  const imagesNumber = payload.images.length
+  for (let i = 0; i < imagesNumber; i++) {
     const imageData = payload.images[i]
     const imageName = payload.question_id + '_' + i
     firestorage
       .uploadImage(imageData, imageName)
       .then(_ => {
         commit('SUCCESS_UPLOAD_IMAGE')
+        console.log('i:' + i, 'length:' + imagesNumber)
+        i + 1 === imagesNumber ? commit('COMPLETE_UPLOAD_IMAGE') : null
       })
       .catch(err => {
         commit('FAILED_UPLOAD_IMAGE')
