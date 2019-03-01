@@ -1,4 +1,4 @@
-const functions = require('firebase-functions');
+const functions = require('firebase-functions')
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -6,3 +6,11 @@ const functions = require('firebase-functions');
 // exports.helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
+
+const cardImg = require('./cardImg.js')
+const cardPage = require('./cardPage.js')
+
+module.exports = {
+  cardImg: functions.https.onRequest(cardImg),
+  cardPage: functions.https.onRequest(cardPage)
+}

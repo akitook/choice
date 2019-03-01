@@ -21,40 +21,6 @@
         flat
       />
       <div class="card">
-        <div class="imageBox">
-          <div
-            :style="{
-              background: `url(${images[0].url ? images[0].url : '/a.png'}) center center / cover`,
-              border: images[0].url ? 'none' : '3px dashed #F24E86'}"
-            class="image a"
-            @click="pickFile(1, $event)"
-          >
-            <input
-              ref="image1"
-              type="file"
-              style="display: none"
-              accept="image/*"
-              required
-              @change="onFilePicked(1, $event)"
-            >
-          </div>
-          <div
-            :style="{
-              background: `url(${images[1].url ? images[1].url : '/b.png'}) center center / cover`,
-              border: images[1].url ? 'none' : '3px dashed #02B4FF'}"
-            class="image b"
-            @click="pickFile(2, $event)"
-          >
-            <input
-              ref="image2"
-              type="file"
-              style="display: none"
-              accept="image/*"
-              されrequired
-              @change="onFilePicked(2, $event)"
-            >
-          </div>
-        </div>
         <v-textarea
           v-model="title"
           :counter="50"
@@ -68,6 +34,48 @@
             質問<small> (50文字まで)</small>
           </div>
         </v-textarea>
+        <div class="imageBox">
+          <div
+            :style="{
+              background: `url(${images[0].url ? images[0].url : ''}) center center / cover`,
+              border: images[0].url ? 'none' : '2px dashed #E8358B'}"
+            class="image a"
+            @click="pickFile(1, $event)"
+          >
+            <input
+              ref="image1"
+              type="file"
+              style="display: none"
+              accept="image/*"
+              required
+              @change="onFilePicked(1, $event)"
+            >
+            <v-icon
+              v-if="!images[0].url"
+              class="image-icon">
+              add_circle</v-icon>
+          </div>
+          <div
+            :style="{
+              background: `url(${images[1].url ? images[1].url : ''}) center center / cover`,
+              border: images[1].url ? 'none' : '2px dashed #3377F6'}"
+            class="image b"
+            @click="pickFile(2, $event)"
+          >
+            <input
+              ref="image2"
+              type="file"
+              style="display: none"
+              accept="image/*"
+              required
+              @change="onFilePicked(2, $event)"
+            >
+            <v-icon
+              v-if="!images[1].url"
+              class="image-icon">
+              add_circle</v-icon>
+          </div>
+        </div>
       </div>
       <v-checkbox
         v-model="privateMode"
@@ -76,19 +84,14 @@
       <small>プライベートモードにチェックすると、URLを知っている人にのみ公開されます。</small>
       <div class="btn-container">
         <v-btn
-          :disabled="title.length <= 6 || !images[0].file || !images[1].file"
+          :disabled="title.length < 5 || !images[0].file || !images[1].file || !post.isInInput"
           color="success"
-          right
           @click="validate"
         >
-          質問する！
+          質問する
         </v-btn>
       </div>
     </v-form>
-    <ShareCard
-      v-else
-      :question="post.data"
-    />
   </V-layout>
 </template>
 <script>
@@ -113,8 +116,8 @@ export default {
       items: ['画像とテキスト', 'テキストのみ'],
       title: '',
       titleRules: [
-        v => !!v || '6文字以上',
-        v => (v && v.length >= 6) || '質問文は6文字以上入力してください。'
+        v => !!v || '5文字以上',
+        v => (v && v.length >= 5) || '質問文は5文字以上入力してください。'
       ],
       privateMode: false,
       images: [
@@ -150,7 +153,6 @@ export default {
           images: this.images,
           user: this.user.data
         })
-        this.inPost = false
       }
     },
     pickFile(image, e) {
@@ -213,11 +215,25 @@ export default {
 }
 
 .image {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50%;
   height: $cardsWidth;
   max-height: $cardsMaxWidth;
   background-size: cover;
+}
+
+.image-icon {
+  font-size: 36px;
+}
+
+.a .image-icon {
+  color: $color-a;
+}
+
+.b .image-icon {
+  color: $color-b;
 }
 
 .btn-container {

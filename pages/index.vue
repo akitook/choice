@@ -4,8 +4,8 @@
     justify-center
     align-center>
     <CardList
-      v-if="questions.records"
-      :questions="questions.records"/>
+      v-if="globalQuestions.records.length > 0"
+      :questions="globalQuestions.records"/>
     <div v-else>
       <Loading />
     </div>
@@ -22,13 +22,11 @@ export default {
     CardList,
     Loading
   },
-  computed: {
-    ...mapState(['questions', 'user'])
-  },
+  computed: mapState({
+    globalQuestions: 'questions',
+    user: 'user'
+  }),
   created() {},
-  mounted() {
-    this.$store.dispatch('questions/fetchQuestions', this.user.data)
-    console.log(this.questions)
-  }
+  mounted() {}
 }
 </script>

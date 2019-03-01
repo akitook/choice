@@ -1,8 +1,9 @@
 <template>
   <div
+    :class="size"
     class="user">
     <v-avatar
-      size="32"
+      :size="avatarSize"
     >
       <img
         :src="data ? data.photoURL : '/user.jpg'"
@@ -26,6 +27,17 @@ export default {
           displayName: ''
         }
       }
+    },
+    size: {
+      type: String,
+      default: 'medium'
+    }
+  },
+  computed: {
+    avatarSize() {
+      const avatarSize =
+        this.size === 'small' ? 24 : this.size === 'large' ? 42 : 32
+      return avatarSize
     }
   }
 }
@@ -35,13 +47,24 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 8px 0;
+  padding: 4px;
 }
+
 .thumbnail {
   width: 100%;
   height: 100%;
   margin-right: 12px;
 }
+
+.small .user-name {
+  font-size: 12px;
+}
+
+.medium .user-name {
+  font-size: 14px;
+}
 .user-name {
+  font-weight: bold;
+  color: #444444;
 }
 </style>

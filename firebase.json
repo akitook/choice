@@ -14,6 +14,16 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/card/*",
+        "function": "cardPage"
+      },
+      {
+        "source": "ogp/card/*",
+        "function": "cardImg"
+      }
     ]
   },
   "storage": {

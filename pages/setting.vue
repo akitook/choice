@@ -1,26 +1,26 @@
 <template>
   <v-layout>
-    <v-flex text-xs-center>
-      <div
-        v-if="user.data"
-        class="user">
-        <img
-          :src="user.data.photoURL"
-          :alt="user.data.displayName"
-          class="thumbnail"
-        >
-        <div>{{ user.data.displayName }}</div>
-      </div>
-      <v-btn
-        flat
-        color="error"
-        @click="logout">ログアウト</v-btn>
-    </v-flex>
+    <v-container>
+      <v-flex text-xs-center>
+        <Login v-if="!user.data"/>
+        <div v-else>
+          <UserForm />
+          <v-btn
+            flat
+            color="error"
+            @click="logout">ログアウト</v-btn>
+        </div>
+      </v-flex>
+    </v-container>
   </v-layout>
 </template>
 <script>
 import { mapState } from 'vuex'
+import UserForm from '~/components/pages/UserForm'
 export default {
+  components: {
+    UserForm
+  },
   data() {
     return {}
   },
@@ -28,11 +28,11 @@ export default {
     ...mapState(['user'])
   },
   created() {
-    this.$store.dispatch('user/fetchStatus')
+    this.user.data
+      ? this.$store.dispatch('user/fetchUser', this.user.data.uid)
+      : null
   },
-  mounted() {
-    !this.user.data ? this.$router.push('/login') : null
-  },
+  mounted() {},
   methods: {
     logout: function() {
       this.$router.push('/')

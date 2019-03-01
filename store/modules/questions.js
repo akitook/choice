@@ -1,18 +1,18 @@
 import firebase from '../../api/firebase'
 
 const state = {
-  records: null,
-  lastVisible: null
+  records: []
 }
 
 const getters = {}
 
 const actions = {
-  fetchQuestions({ dispatch, commit }, user) {
+  fetchQuestions({ dispatch, commit }, userData) {
+    const isLogin = !!userData
+    console.log(isLogin)
     firebase
-      .fetchQuestions(user)
+      .fetchQuestions(userData)
       .then(res => {
-        console.log(res)
         commit('SUCCESS_FETCH_QUESTIONS', res)
       })
       .catch(err => {
@@ -21,11 +21,12 @@ const actions = {
       })
   },
   updateAnswer({ dispatch, commit }, payload) {
-    //payload {card, approval, user}
+    console.log(payload)
+    //payload {card, approval, user, index}
     firebase
       .updateAnswer(payload)
       .then(data => {
-        commit('SUCCESS_UPDATE_CARD')
+        commit('SUCCESS_UPDATE_CARD', payload)
       })
       .catch(errMessage => {
         console.log(errMessage)
@@ -49,21 +50,19 @@ const actions = {
 
 const mutations = {
   SUCCESS_FETCH_QUESTIONS: (state, res) => {
-    state.records = res.records
-    state.lastVisible = res.lastVisible
+    const mergeRecords = state.records.concat(res.records)
+    state.records = mergeRecords
   },
   SUCCESS_FETCH_MORE_QUESTIONS: (state, res) => {
-    state.records = {
-      ...state.records,
-      ...res.records
-    }
-    state.lastVisible = {
-      ...state.lastVisible,
-      ...res.lastVisible
-    }
+    state.records = [state.records, res.records]
   },
   FAILED_FETCH_QUESTIONS: (state, err) => {},
-  SUCCESS_UPDATE_CARD: state => {},
+  SUCCESS_UPDATE_CARD: (state, res) => {
+    state.records[res.index].choice.total++
+    res.approval === 'a'
+      ? state.records[res.index].choice.one.total++
+      : state.records[res.index].choice.two.total++
+  },
   FAILED_UPDATE_CARD: state => {},
   SUCCESS_UPDATE_USER_ANSWER: state => {},
   FAILED_UPDATE_USER_ANSWER: state => {}

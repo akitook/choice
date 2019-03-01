@@ -5,34 +5,26 @@
     align-center
   >
     <v-container>
-      <div
-        v-if="user.data"
-        class="user">
-        <img
-          :src="user.data.photoURL"
-          :alt="user.data.displayName"
-          class="thumbnail"
-        >
-        <div>{{ user.data.displayName }}</div>
-      </div>
-      <QuestionList
-        v-if="user.questions"
-        :questions="user.questions"/>
+      <v-flex text-xs-center>
+        <Login v-if="!user.data"/>
+        <UserForm v-else-if="user.data.isNewUser" />
+        <div v-else>
+          <MyPage />
+        </div>
+      </v-flex>
     </v-container>
   </v-layout>
 </template>
 <script>
 import { mapState } from 'vuex'
-import QuestionList from '~/components/ui/QuestionList.vue'
-import Loading from '~/components/ui/Loading.vue'
-
+import Login from '~/components/pages/Login'
+import UserForm from '~/components/pages/UserForm'
+import MyPage from '~/components/pages/MyPage'
 export default {
   components: {
-    QuestionList,
-    Loading
-  },
-  data() {
-    return {}
+    Login,
+    UserForm,
+    MyPage
   },
   computed: {
     ...mapState(['user'])
@@ -40,28 +32,9 @@ export default {
   created() {
     this.$store.dispatch('user/fetchStatus')
   },
-  mounted() {
-    !this.user.data
-      ? this.$router.push('/login')
-      : this.$store.dispatch('user/fetchUserQuestions', this.user.data.uid)
-  },
+  mounted() {},
   methods: {}
 }
 </script>
 <style lang="scss" scoped>
-.user {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-}
-.thumbnail {
-  width: 32px;
-  height: 32px;
-  border-radius: 16px;
-  margin-right: 12px;
-}
-.message {
-  text-align: center;
-}
 </style>

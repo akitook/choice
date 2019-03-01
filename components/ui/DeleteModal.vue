@@ -7,7 +7,7 @@
       <v-card-title class="headline">この質問を削除しますか？</v-card-title>
 
       <v-card-text>
-        ｆｄさふぁっｓｆｄ「
+        {{ question.title }}
       </v-card-text>
 
       <v-card-actions>

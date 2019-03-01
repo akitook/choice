@@ -4,10 +4,10 @@
     class="card-container"
   >
     <QuestionCard
-      v-for="(card, index) in cards.data"
+      v-for="(card, index) in cards"
       :key="index"
       :question="card"
-      :current="index === cards.index"
+      :current="index === cardsIndex"
       :approved="card.approved"
       @draggedThreshold="onThrowout"
       @toggleModal="toggleModal"
@@ -19,8 +19,9 @@
       windowHeight: {{ windowHeight }} innerHeight: {{ innerHeight }} cardContainer: {{ cardContainerHeight }}
     </div>
     <ReportFormModal
+      v-if="isOpenModal"
       :is-open="isOpenModal"
-      :question="cards.data[cards.index]"
+      :question="cards[cardsIndex]"
       @toggleModal="toggleModal"
     />
   </div>
@@ -52,12 +53,7 @@ export default {
         maxThrowOutDistance: 300
       },
       max: 10,
-      cards: {
-        data: this.questions.map(q => {
-          return { ...q, approved: null }
-        }),
-        index: 0
-      },
+      cardsIndex: 0,
       isShowResult: false,
       timer: null,
       approval: null,
@@ -65,7 +61,12 @@ export default {
     }
   },
   computed: {
-    ...mapState(['user'])
+    ...mapState(['user']),
+    cards() {
+      return this.questions.map(q => {
+        return { ...q, approved: null }
+      })
+    }
   },
   created() {
     if (process.browser) {
@@ -73,14 +74,20 @@ export default {
       const innerHeight = require('ios-inner-height')()
       this.windowHeight = window.innerHeight
       this.innerHeight = innerHeight
-      // cardContainer: アドレスバーを引いた高さ - margin-top:16px - header - Result(40 + margin-top:24px)
-      this.cardContainerHeight = window.innerHeight - 16 - 56 - 64
+      // cardContainer: アドレスバーを引いた高さ - margin-top:16px - header - margin-bottom
+      this.cardContainerHeight = window.innerHeight - 16 - 56 - 48
     }
   },
   methods: {
     onThrowout(approval) {
-      console.log(approval)
+      /*
+      どちらかに投げる or タップする
+      リザルト表示に変更
+      4秒後
+      カードが上方向に消えていく
+       */
       this.approval = approval
+      this.updateAnswer()
       // resultの表示
       if (this.isShowResult) {
         clearTimeout(this.timer)
@@ -88,32 +95,40 @@ export default {
         this.isShowResult = true
       }
       this.startTimer()
-      const payload = {
-        card: this.cards.data[this.cards.index],
-        user: {
-          uid: this.user.data.uid,
-          displayName: this.user.data.displayName,
-          photoURL: this.user.data.photoURL
-        },
-        approval
-      }
-      // aorb の dispatch
-      this.$store.dispatch('questions/updateAnswer', payload)
-      this.$store.dispatch('questions/updateUserAnswer', payload)
-      this.cards.data[this.cards.index].approved = approval
-      this.cards.index++
-      if (this.cards.index >= this.cards.data.length) {
-        console.log('all')
+      //19枚目で次のカードセットを読み込む
+      if (this.cardsIndex === this.cards.length - 2) {
+        this.$store.dispatch('questions/fetchQuestions', this.user.data)
       }
     },
-    closeResult() {
+    changeCard() {
+      this.cards[this.cardsIndex].approved = this.approval
+      this.cardsIndex++
       this.isShowResult = false
     },
     startTimer() {
-      this.timer = setTimeout(this.closeResult, 4000)
+      this.timer = setTimeout(this.changeCard, 2000)
     },
     toggleModal() {
       this.isOpenModal = !this.isOpenModal
+    },
+    updateAnswer() {
+      const payload = {
+        card: this.cards[this.cardsIndex],
+        approval: this.approval,
+        index: this.cardsIndex
+      }
+      payload.user = this.user.data
+        ? {
+            uid: this.user.data.uid,
+            displayName: this.user.data.displayName,
+            photoURL: this.user.data.photoURL
+          }
+        : null
+      // aorb の dispatch
+      this.$store.dispatch('questions/updateAnswer', payload)
+      this.user.data
+        ? this.$store.dispatch('questions/updateUserAnswer', payload)
+        : null
     }
   }
 }
@@ -121,8 +136,9 @@ export default {
 <style lang="scss" scoped>
 .card-container {
   position: relative;
-  width: 100vw;
+  width: $cardsWidth;
   max-width: $cardsMaxWidth;
+  margin: 16px auto;
   //transform: translateY(-50%);
 }
 </style>

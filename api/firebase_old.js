@@ -3,79 +3,68 @@ import firebase, { providerGoogle, providerTwitter } from '~/plugins/firebase'
 const firestore = firebase.firestore()
 
 export default {
-  fetchQuestions(userData) {
+  fetchQuestions(user) {
     // public: true かつ未回答かつユーザーの質問でない
-    const userId = userData ? userData.uid : '00'
+    const userId = user ? user.uid : '00'
     console.log('user id:' + userId)
     let query = firestore.collection('questions')
     //isPublic
-    //query = query.where('public', '==', true)
-    //random
-    //const randomRefId = firestore.collection('questions').doc().id
-    //query = query.where('id', '>', randomRefId)
-    // not yet answer one, two
-    // query = que.where('choice.one.users.' + userId, '==', false)
-    // query = questionsRef.where('choice.two.users.' + userId, '==', false)
+    query = query.where('public', '==', true)
+    /*random
+      const randomRefId = firestore.collection('questions').doc().id
+      query = query.where('id', '>', randomRefId)
+    */
+    /* not yet answer one, two
+      query = query.where('choice.one.users.' + userId, '==', false)
+      query = query.where('choice.two.users.' + userId, '==', false)
+    */
     return new Promise((resolve, reject) => {
-      //let first_records, second_records, total_records
-      function runQuery(i) {
-        return new Promise((resolve, reject) => {
-          const randomRefId = firestore.collection('questions').doc().id
+      function loop (i) {
+        return new Promise(function(resolve, reject) {
+          let first_records, second_records, total_records
           query
-            .where('id', '>', randomRefId)
-            .limit(6)
+            .where('author.uid', '>', userId)
+            .limit(2)
             .get()
             .then(querySnapshot => {
-              let records = querySnapshot.docs.map(elem => elem.data())
-              resolve(records)
+              first_records = querySnapshot.docs.map(elem => elem.data())
+              query
+                .where('author.uid', '<', userId)
+                .limit(2)
+                .get()
+                .then(querySnapshot => {
+                  second_records = querySnapshot.docs.map(elem => elem.data())
+                  total_records = first_records.concat(second_records)
+                  records = records.concat(total_records)
+                  console.log(second_records)
+                })
+                .catch(err => {
+                  reject(err)
+                })
             })
             .catch(err => {
               reject(err)
             })
         })
+          .then(function(count) {
+            if (count > 5) {
+              res()
+            } else {
+              loop(count)
+            }
+          })
       }
-      let total_records = []
-      function loop(fn, i, end) {
-        return fn(i).then(records => {
-          total_records = total_records.concat(records)
-          if (i < end) {
-            return loop(fn, i + 1, end)
-          } else {
-            return Promise.resolve(total_records)
-          }
-        })
-      }
-      loop(runQuery, 0, 2)
-        .then(total_records => {
-          console.log(userId)
-          console.log(total_records)
-          // 回答済みの質問を除外するfilter
-          const filteredRecords = total_records.filter(
-            record =>
-              !record.choice.one.users[userId] &&
-              !record.choice.two.users[userId]
-          )
-          console.log(filteredRecords)
-          resolve({ records: filteredRecords })
-        })
-        .catch(err => {
-          reject(err)
-        })
+
+      loop(0);
+    }).then(function() {
+      resolve()
     })
-    /*
-    query
-      .where('author.uid', '<', userId)
-      .limit(2)
-      .get()
-      .then(querySnapshot => {
-        second_records = querySnapshot.docs.map(elem => elem.data())
-        total_records = first_records.concat(second_records)
-        resolve({ records: total_records })
-      })
-      .catch(err => {
-        reject(err)
-      })
-      */
+      let records = {}
+      for (let i = 0; i < 5; i++) {
+        console.log(i)
+      }
+      resolve({ records })
+    })
   },
   fetchQuestion(uid) {
     return new Promise((resolve, reject) => {
@@ -106,7 +95,7 @@ export default {
         })
     })
   },
-  getAuth() {
+  getUser() {
     return new Promise((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         let filtered = null
@@ -122,31 +111,6 @@ export default {
         }
         resolve(filtered)
       })
-    })
-  },
-  getUser(uid) {
-    return new Promise((resolve, reject) => {
-      firestore
-        .collection('users')
-        .doc(uid)
-        .get()
-        .then(querySnapshot => {
-          const user = querySnapshot.data()
-          let filtered = null
-          if (user) {
-            filtered = {
-              birthYear: user.birthYear,
-              created: user.created,
-              sex: user.sex
-              //modified: user.modified,
-            }
-          }
-          resolve(filtered)
-        })
-        .catch(err => {
-          const errorCode = err.code
-          resolve(errorCode)
-        })
     })
   },
   login(type) {
@@ -194,8 +158,7 @@ export default {
         uid: data.uid,
         photoURL: data.photoURL,
         displayName: data.displayName,
-        created,
-        modified: created
+        created
       }
       ref
         .set(userData)
@@ -210,7 +173,6 @@ export default {
   },
   updateUser(payload) {
     return new Promise((resolve, reject) => {
-      const modified = firebase.firestore.FieldValue.serverTimestamp()
       const displayName = payload.displayName
       const sex = payload.sex
       const birthYear = payload.birthYear
@@ -218,8 +180,7 @@ export default {
       const updateUserData = {
         displayName,
         sex,
-        birthYear,
-        modified
+        birthYear
       }
       firestore
         .collection('users')
