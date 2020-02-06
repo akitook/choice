@@ -10,6 +10,7 @@ const actions = {
   fetchQuestions({ dispatch, commit }, userData) {
     const isLogin = !!userData
     console.log(isLogin)
+    dispatch('clearQuestions')
     firebase
       .fetchQuestions(userData)
       .then(res => {
@@ -20,6 +21,11 @@ const actions = {
         commit('FAILED_FETCH_QUESTIONS')
       })
   },
+
+  clearQuestions({ commit }) {
+    commit('CLEAR_QUESTIONS')
+  },
+
   updateAnswer({ dispatch, commit }, payload) {
     console.log(payload)
     //payload {card, approval, user, index}
@@ -65,7 +71,10 @@ const mutations = {
   },
   FAILED_UPDATE_CARD: state => {},
   SUCCESS_UPDATE_USER_ANSWER: state => {},
-  FAILED_UPDATE_USER_ANSWER: state => {}
+  FAILED_UPDATE_USER_ANSWER: state => {},
+  CLEAR_QUESTIONS: state => {
+    state.records = []
+  }
 }
 
 export default {

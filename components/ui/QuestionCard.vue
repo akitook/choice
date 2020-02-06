@@ -523,6 +523,7 @@ $defaultScale: 1 - ($cardsScaleOffset * $cardsTotal);
 .bar {
   position: absolute;
   height: 12px;
+  width: 0;
   &.one {
     right: 0;
     background: $color-a;

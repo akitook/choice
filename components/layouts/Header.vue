@@ -10,12 +10,9 @@
     >
       <v-list>
         <v-list-tile>
-          <nuxt-link to="/mypage">
-            <User :data="user.data" />
-          </nuxt-link>
+          <User :data="user.data" />
         </v-list-tile>
         <v-list-tile
-          v-if="!user.data"
           to="/mypage"
           router
           exact
@@ -25,9 +22,16 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title
+              v-if="!user.data"
               class="font-weight-bold"
             >
               ログイン
+            </v-list-tile-title>
+            <v-list-tile-title
+              v-else
+              class="font-weight-bold"
+            >
+              マイページ
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>

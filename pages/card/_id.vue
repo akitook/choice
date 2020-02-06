@@ -18,6 +18,9 @@
         <div class="button-container">
           <v-btn
             flat
+            to="/">画像をダウンロード</v-btn>
+          <v-btn
+            flat
             color="error"
             @click="openDeleteModal">この質問を削除する</v-btn>
         </div>

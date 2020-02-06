@@ -47,14 +47,14 @@ export default {
       }
       loop(runQuery, 0, 2)
         .then(total_records => {
-          console.log(userId)
-          console.log(total_records)
           // 回答済みの質問を除外するfilter
+          console.log('before:' + total_records.length)
           const filteredRecords = total_records.filter(
             record =>
               !record.choice.one.users[userId] &&
               !record.choice.two.users[userId]
           )
+          console.log('after: ' + filteredRecords.length)
           console.log(filteredRecords)
           resolve({ records: filteredRecords })
         })

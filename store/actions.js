@@ -37,7 +37,6 @@ export const fetchQuestions = ({ dispatch, commit }, user) => {
   firebase
     .fetchQuestions(user)
     .then(res => {
-      console.log(res)
       commit('SUCCESS_FETCH_QUESTIONS', res)
     })
     .catch(err => {
