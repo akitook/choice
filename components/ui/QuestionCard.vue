@@ -309,18 +309,16 @@ export default {
         self.icon.opacity = amount
         self.$emit('draggedActive', self.icon.type, amount)
       },
-      onend: function(event) {
+      onend: e => {
         /*
         Check if card has passed the approve/reject threshold and emit approval
         value change event, otherwise reset card and icon to default values.
         */
         /*
-        if (self.position.x > self.threshold) {
-          console.log('a')
-          self.$emit('draggedThreshold', true)
-        } else if (self.position.x < -self.threshold) {
-          console.log('b')
-          self.$emit('draggedThreshold', false)
+        if (self.position.x < self.threshold) {
+          this.choice('a')
+        } else if (self.position.x > -self.threshold) {
+          this.choice('b')
         } else {
         }
         */

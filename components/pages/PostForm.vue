@@ -4,7 +4,7 @@
     align-center
   >
     <PageTitle
-      :title="!post.isSave ? '質問の作成' : '質問が投稿されました！'" />
+      :title="!post.isSave ? 'MAKE YOUR CHOICE' : 'POSTED YOUR CHOICE'" />
     <v-form
       v-if="!post.isSave"
       ref="form"
@@ -16,6 +16,8 @@
         v-model="select"
         :items="items"
         :rules="[v => !!v || 'Item is required']"
+        item-text="label"
+        item-value="value"
         label="質問形式"
         required
         flat
@@ -34,7 +36,9 @@
             質問<small> (50文字まで)</small>
           </div>
         </v-textarea>
-        <div class="imageBox">
+        <div
+          v-if="select === 'two_images'"
+          class="imageBox">
           <div
             :style="{
               background: `url(${images[0].url ? images[0].url : ''}) center center / cover`,
@@ -76,12 +80,14 @@
               add_circle</v-icon>
           </div>
         </div>
+        <div
+          v-if="select === 'only_text'"
+          class="imageBox"
+        >
+          <div class="image a no-image">A</div>
+          <div class="image b no-image">B</div>
+        </div>
       </div>
-      <v-checkbox
-        v-model="privateMode"
-        label="プライベートモードにする"
-      />
-      <small>プライベートモードにチェックすると、URLを知っている人にのみ公開されます。</small>
       <div class="btn-container">
         <v-btn
           :disabled="title.length < 5 || !images[0].file || !images[1].file || !post.isInInput"
@@ -112,8 +118,17 @@ export default {
   data() {
     return {
       valid: true,
-      select: '画像とテキスト',
-      items: ['画像とテキスト', 'テキストのみ'],
+      select: 'two_images',
+      items: [
+        {
+          label: '画像とテキスト',
+          value: 'two_images'
+        },
+        {
+          label: 'テキストのみ',
+          value: 'only_text'
+        }
+      ],
       title: '',
       titleRules: [
         v => !!v || '5文字以上',
@@ -222,6 +237,16 @@ export default {
   height: $cardsWidth;
   max-height: $cardsMaxWidth;
   background-size: cover;
+  &.a.no-image {
+    color: #fff;
+    font-size: 24px;
+    background-color: $color-a;
+  }
+  &.b.no-image {
+    color: #fff;
+    font-size: 24px;
+    background-color: $color-b;
+  }
 }
 
 .image-icon {
